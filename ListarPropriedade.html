@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Agrícola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body class="bg-gray-100 h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed h-full bg-[#2F4F2F] flex flex-col py-4 text-white transition-all duration-300" style="width: 5rem;">
+      <div class="flex items-center mb-8 px-4">
+        <img src="assets/logo.png" alt="Logo" class="w-12 h-12 min-w-[3rem]">
+        <span class="ml-3 font-semibold text-lg whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300" id="logo-text">RAÍZES</span>
+      </div>
+      
+      <nav class="flex flex-col gap-6">
+        <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons min-w-[24px]">home</span>
+          <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Propriedades</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons min-w-[24px]">eco</span>
+          <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Plantios</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons min-w-[24px]">description</span>
+          <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Plano de contas</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons min-w-[24px]">calendar_today</span>
+          <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Colheitas</span>
+        </a>
+        <div class="relative">
+          <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg" id="relatorios-btn">
+            <span class="material-icons min-w-[24px]">analytics</span>
+            <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Relatórios</span>
+            <span class="material-icons ml-auto transform transition-transform duration-200">expand_more</span>
+          </a>
+          <div class="hidden pl-12 mt-2 space-y-2" id="relatorios-submenu">
+            <a href="#" class="block py-2 hover:text-green-300">Estimativa 180 dias</a>
+            <a href="#" class="block py-2 hover:text-green-300">Histórico de custos</a>
+            <a href="#" class="block py-2 hover:text-green-300">Histórico de Colheitas</a>
+            <a href="#" class="block py-2 hover:text-green-300">Plano de Contas</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="mt-auto px-4">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="assets/avatar.jpg" alt="Avatar" class="w-10 h-10 rounded-full min-w-[2.5rem]">
+          <span class="whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Antonio silva</span>
+        </div>
+        <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons min-w-[24px]">settings</span>
+          <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Configurações</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 hover:bg-[#3a613a] rounded-lg text-red-400">
+          <span class="material-icons min-w-[24px]">logout</span>
+          <span class="ml-3 whitespace-nowrap overflow-hidden opacity-0 transition-opacity duration-300">Sair</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-20 p-8 h-screen flex flex-col">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-3 gap-8 mb-8">
+        <div class="bg-white rounded-lg p-6 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-gray-100 rounded-full">
+              <span class="material-icons text-green-600">home</span>
+            </div>
+            <div>
+              <p class="text-gray-600">Propriedades</p>
+              <h2 class="text-2xl font-semibold">2</h2>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-6 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-gray-100 rounded-full">
+              <span class="material-icons text-green-600">eco</span>
+            </div>
+            <div>
+              <p class="text-gray-600">Plantios</p>
+              <h2 class="text-2xl font-semibold">2</h2>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-6 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-gray-100 rounded-full">
+              <span class="material-icons text-green-600">person</span>
+            </div>
+            <div>
+              <p class="text-gray-600">Ativos</p>
+              <h2 class="text-2xl font-semibold">2</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="bg-white rounded-lg p-6 shadow-sm flex-1 flex flex-col min-h-0">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold">Propriedades</h2>
+          <div class="flex gap-4">
+            <div class="relative">
+              <span class="material-icons absolute left-3 top-2.5 text-gray-400">search</span>
+              <input type="text" placeholder="Pesquisar" class="pl-10 pr-4 py-2 border rounded-lg">
+            </div>
+            <select class="px-4 py-2 border rounded-lg">
+              <option>Ordenação: Nome</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex-1 overflow-auto min-h-0">
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-gray-600">
+                <th class="pb-4 sticky top-0 bg-white">Nome</th>
+                <th class="pb-4 sticky top-0 bg-white">Plantios</th>
+                <th class="pb-4 sticky top-0 bg-white">Solo</th>
+                <th class="pb-4 sticky top-0 bg-white">Endereço</th>
+                <th class="pb-4 sticky top-0 bg-white">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="py-4">Propriedade Ativa</td>
+                <td>1</td>
+                <td>Latossolo</td>
+                <td>numero 1, Endereço 1, bairro 1, cidade 1, país 1</td>
+                <td><span class="px-3 py-1 bg-green-100 text-green-600 rounded-full">Ativa</span></td>
+              </tr>
+              <tr class="border-t">
+                <td class="py-4">Propriedade Inativa</td>
+                <td>1</td>
+                <td>Latossolo</td>
+                <td>numero 1, Endereço 1, bairro 1, cidade 1, país 1</td>
+                <td><span class="px-3 py-1 bg-red-100 text-red-600 rounded-full">Inativa</span></td>
+              </tr>
+              <!-- Linhas adicionais para demonstrar a rolagem -->
+              <tr class="border-t">
+                <td class="py-4">Propriedade 3</td>
+                <td>1</td>
+                <td>Latossolo</td>
+                <td>numero 1, Endereço 1, bairro 1, cidade 1, país 1</td>
+                <td><span class="px-3 py-1 bg-green-100 text-green-600 rounded-full">Ativa</span></td>
+              </tr>
+              <tr class="border-t">
+                <td class="py-4">Propriedade 4</td>
+                <td>1</td>
+                <td>Latossolo</td>
+                <td>numero 1, Endereço 1, bairro 1, cidade 1, país 1</td>
+                <td><span class="px-3 py-1 bg-green-100 text-green-600 rounded-full">Ativa</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex justify-between items-center mt-6 pt-4 border-t">
+          <p class="text-gray-600">Mostrando 1 de 10</p>
+          <div class="flex gap-2">
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-green-600 text-white">1</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">2</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">3</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">4</button>
+            <span class="w-8 h-8 flex items-center justify-center">...</span>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">10</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const textElements = document.querySelectorAll('.whitespace-nowrap');
+        const relatoriosBtn = document.getElementById('relatorios-btn');
+        const relatoriosSubmenu = document.getElementById('relatorios-submenu');
+        let isExpanded = false;
+        let isSubmenuOpen = false;
+
+        // Função para expandir/recolher a sidebar
+        function toggleSidebar() {
+            isExpanded = !isExpanded;
+            
+            if (isExpanded) {
+                sidebar.style.width = '16rem'; // 256px
+                textElements.forEach(el => {
+                    el.style.opacity = '1';
+                });
+            } else {
+                sidebar.style.width = '5rem'; // 80px
+                textElements.forEach(el => {
+                    el.style.opacity = '0';
+                });
+                // Fecha o submenu quando a sidebar for recolhida
+                relatoriosSubmenu.classList.add('hidden');
+                isSubmenuOpen = false;
+            }
+        }
+
+        // Função para alternar o submenu de relatórios
+        function toggleSubmenu(event) {
+            event.preventDefault();
+            if (!isExpanded) {
+                toggleSidebar();
+            }
+            
+            isSubmenuOpen = !isSubmenuOpen;
+            const arrow = relatoriosBtn.querySelector('.material-icons:last-child');
+            
+            if (isSubmenuOpen) {
+                relatoriosSubmenu.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                relatoriosSubmenu.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Event Listeners
+        sidebar.addEventListener('mouseenter', () => {
+            if (!isExpanded) toggleSidebar();
+        });
+
+        sidebar.addEventListener('mouseleave', () => {
+            if (isExpanded) toggleSidebar();
+        });
+
+        relatoriosBtn.addEventListener('click', toggleSubmenu);
+    });
+    </script>
+  </body>
+</html>

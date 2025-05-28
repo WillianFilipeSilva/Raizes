@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Agrícola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="fixed h-full w-20 bg-[#2F4F2F] flex flex-col items-center py-4 text-white">
+      <div class="mb-8">
+        <img src="assets/logo.png" alt="Logo" class="w-12 h-12">
+      </div>
+      <nav class="flex flex-col gap-6">
+        <a href="#" class="p-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons">home</span>
+        </a>
+        <a href="#" class="p-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons">eco</span>
+        </a>
+        <a href="#" class="p-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons">description</span>
+        </a>
+        <a href="#" class="p-3 hover:bg-[#3a613a] rounded-lg">
+          <span class="material-icons">analytics</span>
+        </a>
+      </nav>
+      <div class="mt-auto">
+        <img src="assets/avatar.jpg" alt="Avatar" class="w-10 h-10 rounded-full">
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-20 p-8">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-3 gap-8 mb-8">
+        <div class="bg-white rounded-lg p-6 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-gray-100 rounded-full">
+              <span class="material-icons text-green-600">home</span>
+            </div>
+            <div>
+              <p class="text-gray-600">Propriedades</p>
+              <h2 class="text-2xl font-semibold">2</h2>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-6 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-gray-100 rounded-full">
+              <span class="material-icons text-green-600">eco</span>
+            </div>
+            <div>
+              <p class="text-gray-600">Plantios</p>
+              <h2 class="text-2xl font-semibold">2</h2>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-6 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-gray-100 rounded-full">
+              <span class="material-icons text-green-600">person</span>
+            </div>
+            <div>
+              <p class="text-gray-600">Ativos</p>
+              <h2 class="text-2xl font-semibold">2</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="bg-white rounded-lg p-6 shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold">Propriedades</h2>
+          <div class="flex gap-4">
+            <div class="relative">
+              <span class="material-icons absolute left-3 top-2.5 text-gray-400">search</span>
+              <input type="text" placeholder="Pesquisar" class="pl-10 pr-4 py-2 border rounded-lg">
+            </div>
+            <select class="px-4 py-2 border rounded-lg">
+              <option>Ordenação: Nome</option>
+            </select>
+          </div>
+        </div>
+
+        <table class="w-full">
+          <thead>
+            <tr class="text-left text-gray-600">
+              <th class="pb-4">Nome</th>
+              <th class="pb-4">Plantios</th>
+              <th class="pb-4">Solo</th>
+              <th class="pb-4">Endereço</th>
+              <th class="pb-4">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t">
+              <td class="py-4">Propriedade Ativa</td>
+              <td>1</td>
+              <td>Latossolo</td>
+              <td>numero 1, Endereço 1, bairro 1, cidade 1, país 1</td>
+              <td><span class="px-3 py-1 bg-green-100 text-green-600 rounded-full">Ativa</span></td>
+            </tr>
+            <tr class="border-t">
+              <td class="py-4">Propriedade Inativa</td>
+              <td>1</td>
+              <td>Latossolo</td>
+              <td>numero 1, Endereço 1, bairro 1, cidade 1, país 1</td>
+              <td><span class="px-3 py-1 bg-red-100 text-red-600 rounded-full">Inativa</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="flex justify-between items-center mt-6">
+          <p class="text-gray-600">Mostrando 1 de 10</p>
+          <div class="flex gap-2">
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-green-600 text-white">1</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">2</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">3</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">4</button>
+            <span class="w-8 h-8 flex items-center justify-center">...</span>
+            <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100">10</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

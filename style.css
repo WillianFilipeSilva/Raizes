@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+:root{
+  /* fonte */
+  --fonte-principal:'Montserrat',sans-serif;
+  /* tamanhos */
+  --font-h1:30px;--font-h2:22px;--font-h3:16px;
+  --font-body:12px;--font-botao:12px;--font-caption:10px;--font-label:12px;
+  /* pesos */
+  --peso-regular:400;--peso-medium:500;--peso-semibold:600;--peso-bold:700;
+  /* cores */
+  --cor-primaria:#519E26;
+  --cor-secundaria:#334B35;
+  --cor-terciaria:#ffffff;
+  --cor-vermelho-claro:#D55F5A;
+}
+
+/* utilidades ligadas ao Tailwind */
+@layer utilities{
+  .bg-primary{background-color:var(--cor-primaria);}
+  .bg-danger{background-color:var(--cor-vermelho-claro);}
+  .text-primary{color:var(--cor-primaria);}
+  .font-body{font-family:var(--fonte-principal);}
+}
