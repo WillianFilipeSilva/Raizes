@@ -1,5 +1,0 @@
-C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Infrastructure\obj\Debug\net8.0\Raizes.Infrastructure.csproj.AssemblyReference.cache
-C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Infrastructure\obj\Debug\net8.0\Raizes.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Infrastructure\obj\Debug\net8.0\Raizes.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Infrastructure\obj\Debug\net8.0\Raizes.Infrastructure.AssemblyInfo.cs
-C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Infrastructure\obj\Debug\net8.0\Raizes.Infrastructure.csproj.CoreCompileInputs.cache
