@@ -1,0 +1,20 @@
+﻿trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0'
+
+- script: |
+    dotnet restore
+    dotnet build --configuration Release
+  displayName: 'Build'
+
+- script: |
+    dotnet publish src/Raizes.WebApi/Raizes.WebApi.csproj -c Release -o /publish
+  displayName: 'Publish'

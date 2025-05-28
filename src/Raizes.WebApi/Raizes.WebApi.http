@@ -1,0 +1,6 @@
+@Raizes.WebApi_HostAddress = http://localhost:5014
+
+GET {{Raizes.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
