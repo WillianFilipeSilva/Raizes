@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "OKk6AbykyUM=",
+  "dgSpecHash": "/XadodBlIos=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\Raizes.Application\\Raizes.Application.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Application\\Raizes.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Willian Filipe\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Willian Filipe\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
+    "C:\\Users\\Willian Filipe\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\Willian Filipe\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\Willian Filipe\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

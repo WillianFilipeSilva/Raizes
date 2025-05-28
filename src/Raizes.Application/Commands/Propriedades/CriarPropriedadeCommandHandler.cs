@@ -8,7 +8,7 @@ public class CriarPropriedadeCommandHandler : IRequestHandler<CriarPropriedadeCo
   private readonly IPropriedadeRepository _repo;
   public CriarPropriedadeCommandHandler(IPropriedadeRepository repo)=>_repo=repo;
   public async Task<Guid> Handle(CriarPropriedadeCommand cmd, CancellationToken ct){
-    var prop = new Propriedade(); // preencher depois
+    var prop = new Propriedade();
     await _repo.AddAsync(prop);
     return prop.Id;
   }

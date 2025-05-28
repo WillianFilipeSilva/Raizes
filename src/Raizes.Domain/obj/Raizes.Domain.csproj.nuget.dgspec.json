@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\Raizes.Domain\\Raizes.Domain.csproj": {}
+    "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Domain\\Raizes.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\Raizes.Domain\\Raizes.Domain.csproj": {
+    "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Domain\\Raizes.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\Raizes.Domain\\Raizes.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Domain\\Raizes.Domain.csproj",
         "projectName": "Raizes.Domain",
-        "projectPath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\Raizes.Domain\\Raizes.Domain.csproj",
+        "projectPath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Domain\\Raizes.Domain.csproj",
         "packagesPath": "C:\\Users\\Willian Filipe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\Raizes.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

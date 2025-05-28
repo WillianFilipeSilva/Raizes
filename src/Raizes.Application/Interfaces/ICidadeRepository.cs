@@ -1,8 +1,8 @@
-﻿using Raizes.Domain.Entities;
-namespace Raizes.Application.Interfaces;
-public interface ICidadeRepository {
-  Task AddAsync(Cidade entity);
-  Task<> GetByIdAsync(Guid id);
-  Task UpdateAsync(Cidade entity);
-  Task DeleteAsync(Guid id);
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Raizes.Domain.Entities;
+
+namespace Raizes.Application.Interfaces
+{
 }

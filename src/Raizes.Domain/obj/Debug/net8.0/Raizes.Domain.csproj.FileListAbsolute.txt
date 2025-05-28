@@ -1,0 +1,11 @@
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\bin\Debug\net8.0\Raizes.Domain.deps.json
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\bin\Debug\net8.0\Raizes.Domain.dll
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\bin\Debug\net8.0\Raizes.Domain.pdb
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\Raizes.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\Raizes.Domain.AssemblyInfoInputs.cache
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\Raizes.Domain.AssemblyInfo.cs
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\Raizes.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\Raizes.Domain.dll
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\refint\Raizes.Domain.dll
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\Raizes.Domain.pdb
+C:\Users\Willian Filipe\Desktop\Raizes\src\Raizes.Domain\obj\Debug\net8.0\ref\Raizes.Domain.dll
