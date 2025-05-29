@@ -3,12 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Agrícola</title>
+    <title>Exemplo de Componentes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="components/SidebarItem.js"></script>
+    <script src="components/MenuItem.js"></script>
+    <script src="components/templates.js"></script>
   </head>
 
   <body class="bg-gray-100">
+    <!-- 1. Usando Web Component -->
+    <sidebar-item 
+        icon="assets/imagens/icones/Icone-Propriedades.svg"
+        label="Propriedades"
+        href="#"
+    ></sidebar-item>
+
+    <!-- 2. Usando Template com JavaScript -->
+    <div id="menu-container"></div>
+    <script>
+        const menuItems = [
+            {
+                icon: 'assets/imagens/icones/Icone-Propriedades.svg',
+                label: 'Propriedades',
+                href: '#'
+            },
+            {
+                icon: 'assets/imagens/icones/Icone-Plantios.svg',
+                label: 'Plantios',
+                href: '#'
+            }
+        ];
+
+        MenuItem.create(document.getElementById('menu-container'), menuItems);
+    </script>
+
+    <!-- 3. Usando Sistema de Templates -->
+    <div data-include="templates/menu-item.html" 
+         data-template-vars='{"icon": "assets/imagens/icones/Icone-Propriedades.svg", "label": "Propriedades"}'>
+    </div>
+
+    <script>
+        // Inicializar sistema de templates
+        document.addEventListener('DOMContentLoaded', () => {
+            TemplateLoader.includeTemplates();
+        });
+    </script>
+
     <!-- Sidebar -->
     <div class="fixed h-full w-20 bg-[#2F4F2F] flex flex-col items-center py-4 text-white">
       <div class="mb-8">

@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1C48A319-DF37-49FF-94BC-2E33D492D8F5}|src\\Raizes.Application\\Raizes.Application.csproj|c:\\users\\willian filipe\\desktop\\raizes\\src\\raizes.application\\commands\\propriedades\\criarpropriedadecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C48A319-DF37-49FF-94BC-2E33D492D8F5}|src\\Raizes.Application\\Raizes.Application.csproj|solutionrelative:src\\raizes.application\\commands\\propriedades\\criarpropriedadecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C48A319-DF37-49FF-94BC-2E33D492D8F5}|src\\Raizes.Application\\Raizes.Application.csproj|c:\\users\\willian filipe\\desktop\\raizes\\src\\raizes.application\\interfaces\\ipropriedaderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C48A319-DF37-49FF-94BC-2E33D492D8F5}|src\\Raizes.Application\\Raizes.Application.csproj|solutionrelative:src\\raizes.application\\interfaces\\ipropriedaderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IPropriedadeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Application\\Interfaces\\IPropriedadeRepository.cs",
+              "RelativeDocumentMoniker": "src\\Raizes.Application\\Interfaces\\IPropriedadeRepository.cs",
+              "ToolTip": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Application\\Interfaces\\IPropriedadeRepository.cs",
+              "RelativeToolTip": "src\\Raizes.Application\\Interfaces\\IPropriedadeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T02:26:25.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CriarPropriedadeCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Application\\Commands\\Propriedades\\CriarPropriedadeCommandHandler.cs",
+              "RelativeDocumentMoniker": "src\\Raizes.Application\\Commands\\Propriedades\\CriarPropriedadeCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Willian Filipe\\Desktop\\Raizes\\src\\Raizes.Application\\Commands\\Propriedades\\CriarPropriedadeCommandHandler.cs",
+              "RelativeToolTip": "src\\Raizes.Application\\Commands\\Propriedades\\CriarPropriedadeCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T02:25:43.047Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

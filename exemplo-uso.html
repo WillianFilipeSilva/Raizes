@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raízes - Sistema Agrícola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="components/Sidebar.js"></script>
+    <link href="assets/styles/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Container para a Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Conteúdo da página -->
+    <div class="ml-20 p-8">
+        <!-- Seu conteúdo aqui -->
+    </div>
+
+    <script>
+        // Dados do menu
+        const menuItems = [
+            {
+                icon: 'assets/imagens/icones/Icone-Propriedades.svg',
+                label: 'Propriedades',
+                href: '/propriedades'
+            },
+            {
+                icon: 'assets/imagens/icones/Icone-Plantios.svg',
+                label: 'Plantios',
+                href: '/plantios'
+            },
+            {
+                icon: 'assets/imagens/icones/Icone-PlanoContas.svg',
+                label: 'Plano de contas',
+                href: '/plano-contas'
+            },
+            {
+                type: 'submenu',
+                icon: 'assets/imagens/icones/Icone-Relatorios.svg',
+                label: 'Relatórios',
+                submenuItems: [
+                    {
+                        label: 'Estimativa 180 dias',
+                        href: '/relatorios/estimativa'
+                    },
+                    {
+                        label: 'Histórico de custos',
+                        href: '/relatorios/custos'
+                    },
+                    {
+                        label: 'Histórico de Colheitas',
+                        href: '/relatorios/colheitas'
+                    }
+                ]
+            }
+        ];
+
+        // Dados do usuário
+        const userData = {
+            name: 'Antonio silva',
+            avatar: 'assets/imagens/Perfil/Foto-Perfil.svg'
+        };
+
+        // Inicializar a sidebar
+        document.addEventListener('DOMContentLoaded', () => {
+            Sidebar.init('sidebar-container', menuItems, userData);
+        });
+    </script>
+</body>
+</html> 

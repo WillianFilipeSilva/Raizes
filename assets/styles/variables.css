@@ -1,0 +1,45 @@
+:root {
+    /* Cores principais */
+    --primary-color: #4CAF50;      /* Verde mais claro para botões e ações principais */
+    --primary-hover: #45a049;
+    --primary-active: #3d8b40;
+
+    /* Cores secundárias */
+    --secondary-color: #2F4F2F;    /* Verde escuro para sidebar e elementos de destaque */
+    --secondary-hover: #3a613a;
+    --secondary-active: #2a472a;
+
+    /* Cores terciárias */
+    --tertiary-color: #FFFFFF;     /* Branco para fundos e cards */
+    --tertiary-hover: #F5F5F5;
+    --tertiary-active: #E8E8E8;
+
+    /* Cores de alerta */
+    --danger-color: #DC3545;       /* Vermelho para ações perigosas e alertas */
+    --danger-hover: #c82333;
+    --danger-light: #f8d7da;       /* Vermelho claro para backgrounds */
+
+    /* Cores de texto */
+    --text-primary: #1a1a1a;       /* Texto principal */
+    --text-secondary: #666666;     /* Texto secundário */
+    --text-light: #999999;         /* Texto claro */
+
+    /* Cores de borda e divisores */
+    --border-color: #E5E7EB;
+    --divider-color: rgba(255, 255, 255, 0.2);
+
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    /* Transições */
+    --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-medium: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Arredondamentos */
+    --border-radius-sm: 0.375rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 0.75rem;
+    --border-radius-xl: 1rem;
+} 
