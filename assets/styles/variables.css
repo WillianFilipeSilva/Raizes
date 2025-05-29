@@ -1,11 +1,11 @@
 :root {
     /* Cores principais */
-    --primary-color: #4CAF50;      /* Verde mais claro para botões e ações principais */
+    --primary-color: #519E26;      /* Verde mais claro para botões e ações principais */
     --primary-hover: #45a049;
     --primary-active: #3d8b40;
 
     /* Cores secundárias */
-    --secondary-color: #2F4F2F;    /* Verde escuro para sidebar e elementos de destaque */
+    --secondary-color: #334B35;    /* Verde escuro para sidebar e elementos de destaque */
     --secondary-hover: #3a613a;
     --secondary-active: #2a472a;
 
@@ -15,7 +15,7 @@
     --tertiary-active: #E8E8E8;
 
     /* Cores de alerta */
-    --danger-color: #DC3545;       /* Vermelho para ações perigosas e alertas */
+    --danger-color: #D55F5A;       /* Vermelho para ações perigosas e alertas */
     --danger-hover: #c82333;
     --danger-light: #f8d7da;       /* Vermelho claro para backgrounds */
 
