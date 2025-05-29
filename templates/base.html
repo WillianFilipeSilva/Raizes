@@ -164,12 +164,10 @@
                             </td>
                             <td class="py-3 px-2 text-center">
                                 <div class="flex justify-center gap-2">
-                                    <button onclick="event.stopPropagation(); window.location.href='/propriedades/1/editar'" 
-                                            class="p-2 hover:bg-primary/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
+                                    <button onclick="event.stopPropagation(); window.location.href='/propriedades/1/editar'" class="p-2 hover:bg-primary/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
                                         <img src="../assets/imagens/icones/Icone-Editar.svg" alt="Editar" class="w-4 h-4">
                                     </button>
-                                    <button onclick="event.stopPropagation(); openDeleteModal(1)" 
-                                            class="p-2 hover:bg-danger/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
+                                    <button onclick="event.stopPropagation(); handleDelete(1)" class="p-2 hover:bg-danger/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
                                         <img src="../assets/imagens/icones/Icone-Deletar.svg" alt="Deletar" class="w-4 h-4" style="filter: invert(22%) sepia(93%) saturate(6449%) hue-rotate(356deg) brightness(97%) contrast(119%);">
                                     </button>
                                 </div>
@@ -187,12 +185,10 @@
                             </td>
                             <td class="py-3 px-2 text-center">
                                 <div class="flex justify-center gap-2">
-                                    <button onclick="event.stopPropagation(); window.location.href='/propriedades/2/editar'" 
-                                            class="p-2 hover:bg-primary/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
+                                    <button onclick="event.stopPropagation(); window.location.href='/propriedades/2/editar'" class="p-2 hover:bg-primary/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
                                         <img src="../assets/imagens/icones/Icone-Editar.svg" alt="Editar" class="w-4 h-4">
                                     </button>
-                                    <button onclick="event.stopPropagation(); openDeleteModal(2)" 
-                                            class="p-2 hover:bg-danger/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
+                                    <button onclick="event.stopPropagation(); handleDelete(2)" class="p-2 hover:bg-danger/10 rounded-full transition-all duration-200 ease-in-out transform hover:scale-110 hover:shadow-md">
                                         <img src="../assets/imagens/icones/Icone-Deletar.svg" alt="Deletar" class="w-4 h-4" style="filter: invert(22%) sepia(93%) saturate(6449%) hue-rotate(356deg) brightness(97%) contrast(119%);">
                                     </button>
                                 </div>
@@ -200,37 +196,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- Modal de Confirmação de Exclusão -->
-            <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center" style="z-index: 1000;">
-                <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 relative">
-                    <!-- Botão de fechar -->
-                    <button onclick="closeDeleteModal()" class="absolute right-4 top-4 text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-
-                    <!-- Conteúdo da Modal -->
-                    <div class="text-center">
-                        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6">
-                            <img src="../assets/imagens/icones/Icone-Deletar.svg" alt="Deletar" class="w-8 h-8" style="filter: invert(22%) sepia(93%) saturate(6449%) hue-rotate(356deg) brightness(97%) contrast(119%);">
-                        </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Deletar</h3>
-                        <p class="text-gray-500 mb-8">Tem certeza que deseja fazer isso?</p>
-                        
-                        <!-- Botões -->
-                        <div class="flex gap-4">
-                            <button onclick="closeDeleteModal()" class="flex-1 px-4 py-3 text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-150">
-                                Cancelar
-                            </button>
-                            <button onclick="confirmDelete()" class="flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-150">
-                                Confirmar
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Paginação -->
@@ -250,43 +215,8 @@
 
     <!-- Scripts -->
     <script src="../components/Sidebar.js"></script>
+    <script src="../components/DeleteModal.js"></script>
     <script>
-        // Variável para armazenar o ID do item a ser deletado
-        let itemToDeleteId = null;
-
-        // Função para abrir a modal de confirmação
-        function openDeleteModal(id) {
-            itemToDeleteId = id;
-            const modal = document.getElementById('deleteModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            // Fecha a modal se clicar fora dela
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeDeleteModal();
-                }
-            });
-        }
-
-        // Função para fechar a modal
-        function closeDeleteModal() {
-            const modal = document.getElementById('deleteModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            itemToDeleteId = null;
-        }
-
-        // Função para confirmar a exclusão
-        function confirmDelete() {
-            if (itemToDeleteId) {
-                // Aqui você pode adicionar a lógica para deletar o item
-                console.log('Deletando item:', itemToDeleteId);
-                // Após deletar, fecha a modal
-                closeDeleteModal();
-            }
-        }
-
         // Configuração da Sidebar
         const menuItems = [
             {
@@ -348,10 +278,22 @@
             avatar: '../assets/imagens/Perfil/Foto-Perfil.svg'
         };
 
-        // Inicialização da Sidebar
+        // Inicialização dos componentes
         document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa a Sidebar
             Sidebar.init('sidebar-container', menuItems, userData);
+            
+            // Inicializa a Modal de Delete
+            DeleteModal.init();
         });
+
+        // Função para lidar com a exclusão
+        function handleDelete(id) {
+            DeleteModal.open(id, (itemId) => {
+                // Aqui você pode adicionar a lógica para deletar o item
+                console.log('Deletando item:', itemId);
+            });
+        }
     </script>
 </body>
 </html> 
