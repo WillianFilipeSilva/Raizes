@@ -1,0 +1,363 @@
+/* ==================== TIPOSOLO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Nome,
+    Descricao
+FROM raizes.tiposolo;
+
+/* GetById */
+SELECT
+    Id,
+    Nome,
+    Descricao
+FROM raizes.tiposolo
+WHERE Id = @id;
+
+
+
+/* ==================== PLANTA ==================== */
+/* GetAll */
+SELECT
+    Id,
+    NomeComum,
+    NomeCientifico,
+    TempoDeColheita,
+    TipoSoloIdealId,
+    IdealPHMin,
+    IdealPHMax,
+    IdealUmidadeMin,
+    IdealUmidadeMax,
+    Caracteristicas
+FROM raizes.planta;
+
+/* GetById */
+SELECT
+    Id,
+    NomeComum,
+    NomeCientifico,
+    TempoDeColheita,
+    TipoSoloIdealId,
+    IdealPHMin,
+    IdealPHMax,
+    IdealUmidadeMin,
+    IdealUmidadeMax,
+    Caracteristicas
+FROM raizes.planta
+WHERE Id = @id;
+
+
+
+/* ==================== USUARIO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Nome,
+    Sobrenome,
+    Cpf,
+    Email,
+    Senha,
+    CriadoEm,
+    Status
+FROM raizes.usuario;
+
+/* GetById */
+SELECT
+    Id,
+    Nome,
+    Sobrenome,
+    Cpf,
+    Email,
+    Senha,
+    CriadoEm,
+    Status
+FROM raizes.usuario
+WHERE Id = @id;
+
+
+
+/* ==================== CIDADE ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Estado,
+    Cidade,
+    Bairro,
+    Rua,
+    Numero
+FROM raizes.cidade;
+
+/* GetById */
+SELECT
+    Id,
+    Estado,
+    Cidade,
+    Bairro,
+    Rua,
+    Numero
+FROM raizes.cidade
+WHERE Id = @id;
+
+
+
+/* ==================== PROPRIEDADE ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Nome,
+    CidadeId,
+    UsuarioId,
+    Status
+FROM raizes.propriedade;
+
+/* GetById */
+SELECT
+    Id,
+    Nome,
+    CidadeId,
+    UsuarioId,
+    Status
+FROM raizes.propriedade
+WHERE Id = @id;
+
+
+
+/* ==================== PLANTIO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    PlantaId,
+    PropriedadeId,
+    DataInicio,
+    DataFim,
+    AreaPlantada,
+    Descricao
+FROM raizes.plantio;
+
+/* GetById */
+SELECT
+    Id,
+    PlantaId,
+    PropriedadeId,
+    DataInicio,
+    DataFim,
+    AreaPlantada,
+    Descricao
+FROM raizes.plantio
+WHERE Id = @id;
+
+
+
+/* ==================== UNIDADEMEDIDA ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Sigla,
+    Nome
+FROM raizes.unidademedida;
+
+/* GetById */
+SELECT
+    Id,
+    Sigla,
+    Nome
+FROM raizes.unidademedida
+WHERE Id = @id;
+
+
+
+/* ==================== COLHEITA ==================== */
+/* GetAll */
+SELECT
+    Id,
+    PlantioId,
+    DataColheita,
+    Quantidade,
+    Observacao,
+    UnidadeMedidaId
+FROM raizes.colheita;
+
+/* GetById */
+SELECT
+    Id,
+    PlantioId,
+    DataColheita,
+    Quantidade,
+    Observacao,
+    UnidadeMedidaId
+FROM raizes.colheita
+WHERE Id = @id;
+
+
+
+/* ==================== FORNECEDOR ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Nome,
+    CNPJ,
+    Telefone,
+    Email
+FROM raizes.fornecedor;
+
+/* GetById */
+SELECT
+    Id,
+    Nome,
+    CNPJ,
+    Telefone,
+    Email
+FROM raizes.fornecedor
+WHERE Id = @id;
+
+
+
+/* ==================== EQUIPAMENTO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Nome,
+    Tipo,
+    Descricao,
+    PrecoUnitario,
+    FornecedorId,
+    DataCompra
+FROM raizes.equipamento;
+
+/* GetById */
+SELECT
+    Id,
+    Nome,
+    Tipo,
+    Descricao,
+    PrecoUnitario,
+    FornecedorId,
+    DataCompra
+FROM raizes.equipamento
+WHERE Id = @id;
+
+
+
+/* ==================== HISTORICOSOLO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    TipoSoloId,
+    DataLeitura,
+    PH,
+    Umidade,
+    Nutricao,
+    Observacoes,
+    PropriedadeId
+FROM raizes.historicosolo;
+
+/* GetById */
+SELECT
+    Id,
+    TipoSoloId,
+    DataLeitura,
+    PH,
+    Umidade,
+    Nutricao,
+    Observacoes,
+    PropriedadeId
+FROM raizes.historicosolo
+WHERE Id = @id;
+
+
+
+/* ==================== INSUMO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    Nome,
+    Tipo,
+    Descricao,
+    FornecedorId
+FROM raizes.insumo;
+
+/* GetById */
+SELECT
+    Id,
+    Nome,
+    Tipo,
+    Descricao,
+    FornecedorId
+FROM raizes.insumo
+WHERE Id = @id;
+
+
+
+/* ==================== INSUMOESTOQUE ==================== */
+/* GetAll */
+SELECT
+    Id,
+    PropriedadeId,
+    InsumoId,
+    Quantidade,
+    PrecoUnitario,
+    PrecoTotal,
+    DataMovimentacao
+FROM raizes.insumoestoque;
+
+/* GetById */
+SELECT
+    Id,
+    PropriedadeId,
+    InsumoId,
+    Quantidade,
+    PrecoUnitario,
+    PrecoTotal,
+    DataMovimentacao
+FROM raizes.insumoestoque
+WHERE Id = @id;
+
+
+
+/* ==================== PLANTIOINSUMO ==================== */
+/* GetAll */
+SELECT
+    Id,
+    PlantioId,
+    InsumoId,
+    Quantidade,
+    DataAplicacao
+FROM raizes.plantioinsumo;
+
+/* GetById */
+SELECT
+    Id,
+    PlantioId,
+    InsumoId,
+    Quantidade,
+    DataAplicacao
+FROM raizes.plantioinsumo
+WHERE Id = @id;
+
+
+
+/* ==================== VENDA ==================== */
+/* GetAll */
+SELECT
+    Id,
+    ColheitaId,
+    PlantaId,
+    Quantidade,
+    PrecoUnitario,
+    PrecoTotal,
+    UnidadeMedidaId,
+    DataVenda
+FROM raizes.venda;
+
+/* GetById */
+SELECT
+    Id,
+    ColheitaId,
+    PlantaId,
+    Quantidade,
+    PrecoUnitario,
+    PrecoTotal,
+    UnidadeMedidaId,
+    DataVenda
+FROM raizes.venda
+WHERE Id = @id;

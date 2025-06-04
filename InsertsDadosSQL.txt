@@ -45,18 +45,24 @@ INSERT INTO planta
 INSERT INTO usuario (Id,Nome,Sobrenome,Cpf,Email,Senha,Status)
 VALUES (1,'João','Silva','12345678901','joao@example.com','senha123',1);
 
--- 5. Propriedades em Santa Catarina
-INSERT INTO propriedade (Id,Nome,Endereco,UsuarioId,Status) VALUES
- (1,'Fazenda Vale do Chapecó','Linha Baronesa, Chapecó-SC',1,1),
- (2,'Estância Campos Novos','BR-470 km330, Campos Novos-SC',1,1),
- (3,'Chácara Joinville','SC-418 km0, Joinville-SC',1,1);
+-- 5. Cidades em Santa Catarina
+INSERT INTO cidade (Id,Estado,Cidade,Bairro,Rua,Numero) VALUES
+ (1,'SC','Chapecó','Linha Baronesa', 'Rua Baronesa', '120'),
+ (2,'SC','Campos Novos','São Sebastião','Rua Capinzal','330'),
+ (3,'SC','Joinville', 'Santo Antônio','Rua Pardal', '90');
 
--- 6. Fornecedores
+-- 6. Propriedades em Santa Catarina
+INSERT INTO propriedade (Id,Nome,CidadeId,UsuarioId,Status) VALUES
+ (1,'Fazenda Vale do Chapecó',1,1,1),
+ (2,'Estância Campos Novos' ,2,1,1),
+ (3,'Chácara Joinville'     ,3,1,1);
+
+-- 7. Fornecedores
 INSERT INTO fornecedor (Id,Nome,CNPJ,Telefone,Email) VALUES
  (1,'AgroBrasil Fertilizantes','00.111.222/0001-33','(65)4000-1000','contato@agrobr.com'),
  (2,'GreenChem Agroquímicos','11.222.333/0001-44','(34)3500-2020','vendas@greenchem.com');
 
--- 7. Insumos genéricos
+-- 8. Insumos genéricos
 INSERT INTO insumo (Id,Nome,Tipo,Descricao,FornecedorId) VALUES
  (1,'Semente Soja RR','Semente','Cultivar precoce',1),
  (2,'Semente Milho VIP3','Semente','Híbrido simples',1),
@@ -69,14 +75,14 @@ INSERT INTO insumo (Id,Nome,Tipo,Descricao,FornecedorId) VALUES
  (9,'Semente Sorgo DKB','Semente','Biomassa',1),
 (10,'Semente Cana RB92579','Muda','Tolete',1);
 
--- 8. Estoque inicial (quantidade em kg, preço R$/kg)
+-- 9. Estoque inicial (quantidade em kg, preço R$/kg)
 INSERT INTO insumoestoque
 (Id,PropriedadeId,InsumoId,Quantidade,PrecoUnitario) VALUES
  (1,1,1,1000,6.00),(2,1,2,800,8.00),(3,1,6,2000,4.00),
  (4,2,3,600,7.50),(5,2,6,1500,4.20),(6,2,7,150,12.00),
  (7,3,4,700,5.50),(8,3,6,1200,4.10),(9,3,8,100,18.00);
 
--- 9. Plantios (5 por propriedade)
+-- 10. Plantios (5 por propriedade)
 INSERT INTO plantio (Id,PlantaId,PropriedadeId,DataInicio,AreaPlantada,Descricao) VALUES
  -- Chapecó
  (1,1,1,'2024-10-01',20,'Soja verão 24/25'),
@@ -99,7 +105,7 @@ INSERT INTO plantio (Id,PlantaId,PropriedadeId,DataInicio,AreaPlantada,Descricao
 (14,10,3,'2024-08-01',8 ,'Laranja Pera Rio'),
 (15,11,3,'2025-04-01',5 ,'Mandioca branca');
 
--- 10. Aplicação de insumos (sementes + fertilizante NPK)
+-- 11. Aplicação de insumos (sementes + fertilizante NPK)
 INSERT INTO plantioinsumo
 (Id,PlantioId,InsumoId,Quantidade,DataAplicacao) VALUES
  (1,1,1,900,'2024-10-05'),(2,1,6,500,'2024-11-01'),
@@ -111,7 +117,7 @@ INSERT INTO plantioinsumo
  (13,8,2,1000,'2025-01-22'),(14,9,10,900,'2024-03-15'),
  (15,11,4,700,'2024-10-05'),(16,11,6,400,'2024-11-01');
 
--- 11. Colheitas (produtividades médias nacionais)
+-- 12. Colheitas (produtividades médias nacionais)
 INSERT INTO colheita
 (Id,PlantioId,DataColheita,Quantidade,UnidadeMedidaId,Observacao) VALUES
  (1,1,'2025-02-01',70000 ,1,'Soja 3,5 t/ha'),
@@ -130,7 +136,7 @@ INSERT INTO colheita
 (14,14,'2025-07-01', 24000,1,'Laranja 30 t/ha'),
 (15,15,'2026-02-01', 25000,1,'Mandioca 5 t/ha');
 
--- 12. Vendas (preços médios R$/kg 2025)
+-- 13. Vendas (preços médios R$/kg 2025)
 INSERT INTO venda
 (Id,ColheitaId,PlantaId,Quantidade,PrecoUnitario,UnidadeMedidaId,DataVenda) VALUES
  (1,1 ,1 ,70000 ,2.30,1,'2025-02-10'),

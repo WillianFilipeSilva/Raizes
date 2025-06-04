@@ -108,12 +108,14 @@ DELETE FROM raizes.insumo WHERE Id = @Id;
 
 
 -- ===============  PROPRIEDADE  ===========================
-INSERT INTO raizes.propriedade (Nome, Endereco, UsuarioId, Status)
-VALUES (@Nome, @Endereco, @UsuarioId, @Status);
+INSERT INTO raizes.propriedade
+ (Nome, CidadeId, UsuarioId, Status)
+VALUES
+ (@Nome, @CidadeId, @UsuarioId, @Status);
 
 UPDATE raizes.propriedade
 SET Nome      = @Nome,
-    Endereco  = @Endereco,
+    CidadeId  = @CidadeId,
     UsuarioId = @UsuarioId,
     Status    = @Status
 WHERE Id = @Id;
@@ -163,17 +165,16 @@ DELETE FROM raizes.colheita WHERE Id = @Id;
 
 -- ===============  INSUMOESTOQUE  =========================
 INSERT INTO raizes.insumoestoque
- (PropriedadeId, InsumoId, Quantidade, Validade,
+ (PropriedadeId, InsumoId, Quantidade,
   DataMovimentacao, PrecoUnitario)
 VALUES
- (@PropriedadeId, @InsumoId, @Quantidade, @Validade,
+ (@PropriedadeId, @InsumoId, @Quantidade,
   @DataMovimentacao, @PrecoUnitario);
 
 UPDATE raizes.insumoestoque
 SET PropriedadeId    = @PropriedadeId,
     InsumoId         = @InsumoId,
     Quantidade       = @Quantidade,
-    Validade         = @Validade,
     DataMovimentacao = @DataMovimentacao,
     PrecoUnitario    = @PrecoUnitario
 WHERE Id = @Id;
