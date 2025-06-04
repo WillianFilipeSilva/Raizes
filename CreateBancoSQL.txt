@@ -1,0 +1,447 @@
+DROP SCHEMA IF EXISTS `raizes` ;
+
+CREATE SCHEMA IF NOT EXISTS `raizes` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `raizes`;
+
+-- -----------------------------------------------------
+-- Table `raizes`.`tiposolo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`tiposolo` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`tiposolo` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(100) NOT NULL,
+  `Descricao` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Nome` (`Nome` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`planta`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`planta` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`planta` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `NomeComum` VARCHAR(100) NOT NULL,
+  `NomeCientifico` VARCHAR(100) NULL DEFAULT NULL,
+  `TempoDeColheita` INT NULL DEFAULT NULL,
+  `TipoSoloIdealId` INT NULL DEFAULT NULL,
+  `IdealPHMin` DECIMAL(4,2) NULL DEFAULT NULL,
+  `IdealPHMax` DECIMAL(4,2) NULL DEFAULT NULL,
+  `IdealUmidadeMin` DECIMAL(5,2) NULL DEFAULT NULL,
+  `IdealUmidadeMax` DECIMAL(5,2) NULL DEFAULT NULL,
+  `Caracteristicas` VARCHAR(300) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_pla_tiposolo` (`TipoSoloIdealId` ASC) VISIBLE,
+  INDEX `idx_pla_nomecomum` (`NomeComum` ASC) VISIBLE,
+  CONSTRAINT `fk_pla_tiposolo`
+    FOREIGN KEY (`TipoSoloIdealId`)
+    REFERENCES `raizes`.`tiposolo` (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`usuario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`usuario` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`usuario` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(100) NOT NULL,
+  `Sobrenome` VARCHAR(100) NOT NULL,
+  `Cpf` VARCHAR(14) NULL DEFAULT NULL,
+  `Email` VARCHAR(100) NOT NULL,
+  `Senha` VARCHAR(100) NOT NULL,
+  `CriadoEm` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Status` TINYINT(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Email` (`Email` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`propriedade`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`propriedade` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`propriedade` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(100) NOT NULL,
+  `Endereco` VARCHAR(200) NULL DEFAULT NULL,
+  `UsuarioId` INT NOT NULL,
+  `Status` TINYINT(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  INDEX `fk_prop_user` (`UsuarioId` ASC) VISIBLE,
+  INDEX `idx_prop_nome` (`Nome` ASC) VISIBLE,
+  CONSTRAINT `fk_prop_user`
+    FOREIGN KEY (`UsuarioId`)
+    REFERENCES `raizes`.`usuario` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`plantio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`plantio` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`plantio` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `PlantaId` INT NOT NULL,
+  `PropriedadeId` INT NOT NULL,
+  `DataInicio` DATE NOT NULL,
+  `DataFim` DATE NULL DEFAULT NULL,
+  `AreaPlantada` DECIMAL(10,2) NULL DEFAULT NULL,
+  `Descricao` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_plantio_planta` (`PlantaId` ASC) VISIBLE,
+  INDEX `fk_plantio_prop` (`PropriedadeId` ASC) VISIBLE,
+  INDEX `idx_plantio_data` (`DataInicio` ASC) VISIBLE,
+  CONSTRAINT `fk_plantio_planta`
+    FOREIGN KEY (`PlantaId`)
+    REFERENCES `raizes`.`planta` (`Id`),
+  CONSTRAINT `fk_plantio_prop`
+    FOREIGN KEY (`PropriedadeId`)
+    REFERENCES `raizes`.`propriedade` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`unidademedida`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`unidademedida` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`unidademedida` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Sigla` VARCHAR(10) NOT NULL,
+  `Nome` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Sigla` (`Sigla` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`colheita`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`colheita` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`colheita` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `PlantioId` INT NOT NULL,
+  `DataColheita` DATE NOT NULL,
+  `Quantidade` DECIMAL(10,2) NOT NULL,
+  `Observacao` VARCHAR(200) NULL DEFAULT NULL,
+  `UnidadeMedidaId` INT NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_colheita_plantio` (`PlantioId` ASC) VISIBLE,
+  INDEX `idx_colheita_data` (`DataColheita` ASC) VISIBLE,
+  INDEX `fk_colheita_unideademedida_idx` (`UnidadeMedidaId` ASC) VISIBLE,
+  CONSTRAINT `fk_colheita_plantio`
+    FOREIGN KEY (`PlantioId`)
+    REFERENCES `raizes`.`plantio` (`Id`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_colheita_unideademedida`
+    FOREIGN KEY (`UnidadeMedidaId`)
+    REFERENCES `raizes`.`unidademedida` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`fornecedor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`fornecedor` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`fornecedor` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(100) NOT NULL,
+  `CNPJ` VARCHAR(20) NULL DEFAULT NULL,
+  `Telefone` VARCHAR(20) NULL DEFAULT NULL,
+  `Email` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`equipamento`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`equipamento` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`equipamento` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(100) NOT NULL,
+  `Tipo` VARCHAR(50) NULL DEFAULT NULL,
+  `Descricao` VARCHAR(200) NULL DEFAULT NULL,
+  `PrecoUnitario` DECIMAL(10,2) NULL DEFAULT NULL,
+  `FornecedorId` INT NULL DEFAULT NULL,
+  `DataCompra` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_equip_fornecedor` (`FornecedorId` ASC) VISIBLE,
+  CONSTRAINT `fk_equip_fornecedor`
+    FOREIGN KEY (`FornecedorId`)
+    REFERENCES `raizes`.`fornecedor` (`Id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`historicosolo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`historicosolo` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`historicosolo` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `TipoSoloId` INT NOT NULL,
+  `DataLeitura` DATETIME NOT NULL,
+  `PH` DECIMAL(4,2) NULL DEFAULT NULL,
+  `Umidade` DECIMAL(5,2) NULL DEFAULT NULL,
+  `Nutricao` DECIMAL(5,2) NULL DEFAULT NULL,
+  `Observacoes` VARCHAR(200) NULL DEFAULT NULL,
+  `PropriedadeId` INT NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_hsolo_tiposolo` (`TipoSoloId` ASC) VISIBLE,
+  INDEX `fk_hsolo_propriedade` (`PropriedadeId` ASC) VISIBLE,
+  INDEX `idx_solo_leitura` (`DataLeitura` ASC) VISIBLE,
+  CONSTRAINT `fk_hsolo_propriedade`
+    FOREIGN KEY (`PropriedadeId`)
+    REFERENCES `raizes`.`propriedade` (`Id`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_hsolo_tiposolo`
+    FOREIGN KEY (`TipoSoloId`)
+    REFERENCES `raizes`.`tiposolo` (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`insumo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`insumo` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`insumo` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Nome` VARCHAR(100) NOT NULL,
+  `Tipo` VARCHAR(50) NULL DEFAULT NULL,
+  `Descricao` VARCHAR(200) NULL DEFAULT NULL,
+  `FornecedorId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_insumo_fornecedor` (`FornecedorId` ASC) VISIBLE,
+  INDEX `idx_insumo_nome` (`Nome` ASC) VISIBLE,
+  CONSTRAINT `fk_insumo_fornecedor`
+    FOREIGN KEY (`FornecedorId`)
+    REFERENCES `raizes`.`fornecedor` (`Id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`insumoestoque`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`insumoestoque` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`insumoestoque` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `PropriedadeId` INT NOT NULL,
+  `InsumoId` INT NOT NULL,
+  `Quantidade` DECIMAL(10,2) NOT NULL,
+  `PrecoUnitario` DECIMAL(10,2) NOT NULL,
+  `PrecoTotal` DECIMAL(20,2) GENERATED ALWAYS AS ((`Quantidade` * `PrecoUnitario`)) VIRTUAL,
+  `DataMovimentacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Id`),
+  INDEX `idx_ie_prop_insumo` (`PropriedadeId` ASC, `InsumoId` ASC) VISIBLE,
+  INDEX `idx_ie_insumo` (`InsumoId` ASC) VISIBLE,
+  CONSTRAINT `fk_ie_insumo`
+    FOREIGN KEY (`InsumoId`)
+    REFERENCES `raizes`.`insumo` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_ie_prop`
+    FOREIGN KEY (`PropriedadeId`)
+    REFERENCES `raizes`.`propriedade` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`plantioinsumo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`plantioinsumo` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`plantioinsumo` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `PlantioId` INT NOT NULL,
+  `InsumoId` INT NOT NULL,
+  `Quantidade` DECIMAL(10,2) NOT NULL,
+  `DataAplicacao` DATE NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_pi_insumo` (`InsumoId` ASC) VISIBLE,
+  INDEX `idx_pi_data` (`DataAplicacao` ASC) VISIBLE,
+  INDEX `idx_pi_plantio_insumo` (`PlantioId` ASC, `InsumoId` ASC) VISIBLE,
+  CONSTRAINT `fk_pi_insumo`
+    FOREIGN KEY (`InsumoId`)
+    REFERENCES `raizes`.`insumo` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_pi_plantio`
+    FOREIGN KEY (`PlantioId`)
+    REFERENCES `raizes`.`plantio` (`Id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `raizes`.`venda`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `raizes`.`venda` ;
+
+CREATE TABLE IF NOT EXISTS `raizes`.`venda` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `ColheitaId` INT NOT NULL,
+  `PlantaId` INT NOT NULL,
+  `Quantidade` DECIMAL(10,2) NOT NULL,
+  `PrecoUnitario` DECIMAL(10,2) NOT NULL,
+  `PrecoTotal` DECIMAL(20,2) GENERATED ALWAYS AS ((`Quantidade` * `PrecoUnitario`)) VIRTUAL,
+  `UnidadeMedidaId` INT NOT NULL,
+  `DataVenda` DATE NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_venda_colheita` (`ColheitaId` ASC) VISIBLE,
+  INDEX `fk_venda_planta` (`PlantaId` ASC) VISIBLE,
+  INDEX `fk_venda_um` (`UnidadeMedidaId` ASC) VISIBLE,
+  INDEX `idx_venda_data` (`DataVenda` ASC) VISIBLE,
+  CONSTRAINT `fk_venda_colheita`
+    FOREIGN KEY (`ColheitaId`)
+    REFERENCES `raizes`.`colheita` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_venda_planta`
+    FOREIGN KEY (`PlantaId`)
+    REFERENCES `raizes`.`planta` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_venda_um`
+    FOREIGN KEY (`UnidadeMedidaId`)
+    REFERENCES `raizes`.`unidademedida` (`Id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_custo_insumos_cultura`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_custo_insumos_cultura` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_custo_insumos_cultura` AS select `p`.`NomeComum` AS `Cultura`,`i`.`Tipo` AS `TipoInsumo`,round(sum((`ig`.`Quantidade` * (select `ie`.`PrecoUnitario` from `raizes`.`insumoestoque` `ie` where (`ie`.`InsumoId` = `ig`.`InsumoId`) order by `ie`.`DataMovimentacao` desc limit 1))),2) AS `Custo` from (((`raizes`.`plantioinsumo` `ig` join `raizes`.`insumo` `i` on((`i`.`Id` = `ig`.`InsumoId`))) join `raizes`.`plantio` `pl` on((`pl`.`Id` = `ig`.`PlantioId`))) join `raizes`.`planta` `p` on((`p`.`Id` = `pl`.`PlantaId`))) group by `p`.`NomeComum`,`i`.`Tipo`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_estoque_consumo_prop`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_estoque_consumo_prop` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_estoque_consumo_prop` AS select `es`.`PropriedadeId` AS `PropriedadeId`,`pr`.`Nome` AS `Propriedade`,`es`.`InsumoId` AS `InsumoId`,`i`.`Nome` AS `Insumo`,`es`.`Quantidade` AS `SaldoAtual`,0 AS `TotalEntradas`,coalesce(`sai`.`TotalSaidas`,0) AS `TotalSaidas` from (((`raizes`.`insumoestoque` `es` join `raizes`.`propriedade` `pr` on((`pr`.`Id` = `es`.`PropriedadeId`))) join `raizes`.`insumo` `i` on((`i`.`Id` = `es`.`InsumoId`))) left join (select `pl`.`PropriedadeId` AS `PropriedadeId`,`ig`.`InsumoId` AS `InsumoId`,sum(`ig`.`Quantidade`) AS `TotalSaidas` from (`raizes`.`plantioinsumo` `ig` join `raizes`.`plantio` `pl` on((`pl`.`Id` = `ig`.`PlantioId`))) group by `pl`.`PropriedadeId`,`ig`.`InsumoId`) `sai` on(((`sai`.`PropriedadeId` = `es`.`PropriedadeId`) and (`sai`.`InsumoId` = `es`.`InsumoId`))));
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_fluxocaixa_prop_mensal`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_fluxocaixa_prop_mensal` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_fluxocaixa_prop_mensal` AS with `entradas` as (select `pr`.`Id` AS `PropriedadeId`,`pr`.`Nome` AS `Propriedade`,year(`v`.`DataVenda`) AS `Ano`,month(`v`.`DataVenda`) AS `Mes`,sum((`v`.`Quantidade` * `v`.`PrecoUnitario`)) AS `Valor` from (((`raizes`.`venda` `v` join `raizes`.`colheita` `c` on((`c`.`Id` = `v`.`ColheitaId`))) join `raizes`.`plantio` `pl` on((`pl`.`Id` = `c`.`PlantioId`))) join `raizes`.`propriedade` `pr` on((`pr`.`Id` = `pl`.`PropriedadeId`))) group by `pr`.`Id`,`pr`.`Nome`,`Ano`,`Mes`), `saidas` as (select `pl`.`PropriedadeId` AS `PropriedadeId`,`pr`.`Nome` AS `Propriedade`,year(`ig`.`DataAplicacao`) AS `Ano`,month(`ig`.`DataAplicacao`) AS `Mes`,sum((`ig`.`Quantidade` * (select `ie`.`PrecoUnitario` from `raizes`.`insumoestoque` `ie` where (`ie`.`InsumoId` = `ig`.`InsumoId`) order by `ie`.`DataMovimentacao` desc limit 1))) AS `Valor` from ((`raizes`.`plantioinsumo` `ig` join `raizes`.`plantio` `pl` on((`pl`.`Id` = `ig`.`PlantioId`))) join `raizes`.`propriedade` `pr` on((`pr`.`Id` = `pl`.`PropriedadeId`))) group by `pl`.`PropriedadeId`,`pr`.`Nome`,`Ano`,`Mes`) select `e`.`PropriedadeId` AS `PropriedadeId`,`e`.`Propriedade` AS `Propriedade`,`e`.`Ano` AS `Ano`,`e`.`Mes` AS `Mes`,round(`e`.`Valor`,2) AS `Entradas`,round(ifnull(`s`.`Valor`,0),2) AS `Saidas`,round((`e`.`Valor` - ifnull(`s`.`Valor`,0)),2) AS `Saldo` from (`entradas` `e` left join `saidas` `s` on(((`s`.`PropriedadeId` = `e`.`PropriedadeId`) and (`s`.`Ano` = `e`.`Ano`) and (`s`.`Mes` = `e`.`Mes`)))) union all select `s`.`PropriedadeId` AS `PropriedadeId`,`s`.`Propriedade` AS `Propriedade`,`s`.`Ano` AS `Ano`,`s`.`Mes` AS `Mes`,0 AS `0`,round(`s`.`Valor`,2) AS `ROUND(s.Valor, 2)`,round(-(`s`.`Valor`),2) AS `ROUND(-s.Valor, 2)` from (`saidas` `s` left join `entradas` `e` on(((`e`.`PropriedadeId` = `s`.`PropriedadeId`) and (`e`.`Ano` = `s`.`Ano`) and (`e`.`Mes` = `s`.`Mes`)))) where (`e`.`PropriedadeId` is null);
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_fluxo_caixa_previsto_180d`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_fluxo_caixa_previsto_180d` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_fluxo_caixa_previsto_180d` AS select `raizes`.`vfm`.`PropriedadeId` AS `PropriedadeId`,`raizes`.`vfm`.`Propriedade` AS `Propriedade`,round((avg(`raizes`.`vfm`.`Entradas`) * 6),2) AS `PrevistoEntradas`,round((avg(`raizes`.`vfm`.`Saidas`) * 6),2) AS `PrevistoSaidas`,round((avg(`raizes`.`vfm`.`Saldo`) * 6),2) AS `PrevistoSaldo` from `raizes`.`vw_fluxocaixa_prop_mensal` `vfm` group by `raizes`.`vfm`.`PropriedadeId`,`raizes`.`vfm`.`Propriedade`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_fluxocaixa_prop_total`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_fluxocaixa_prop_total` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_fluxocaixa_prop_total` AS select `raizes`.`vfm`.`PropriedadeId` AS `PropriedadeId`,`raizes`.`vfm`.`Propriedade` AS `Propriedade`,sum(`raizes`.`vfm`.`Entradas`) AS `EntradasTotais`,sum(`raizes`.`vfm`.`Saidas`) AS `SaidasTotais`,sum(`raizes`.`vfm`.`Saldo`) AS `SaldoTotal` from `raizes`.`vw_fluxocaixa_prop_mensal` `vfm` group by `raizes`.`vfm`.`PropriedadeId`,`raizes`.`vfm`.`Propriedade`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_historico_colheitas`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_historico_colheitas` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_historico_colheitas` AS select `co`.`Id` AS `ColheitaId`,`pr`.`Nome` AS `Propriedade`,`p`.`NomeComum` AS `Cultura`,`co`.`DataColheita` AS `Data`,`co`.`Quantidade` AS `QtColhida`,round(sum((`ig`.`Quantidade` * (select `ie`.`PrecoUnitario` from `raizes`.`insumoestoque` `ie` where (`ie`.`InsumoId` = `ig`.`InsumoId`) order by `ie`.`DataMovimentacao` desc limit 1))),2) AS `CustoInsumos`,round(sum((`ig`.`Quantidade` * (select `ie`.`PrecoUnitario` from `raizes`.`insumoestoque` `ie` where (`ie`.`InsumoId` = `ig`.`InsumoId`) order by `ie`.`DataMovimentacao` desc limit 1))),2) AS `CustoTotal`,(case when (`co`.`Quantidade` > 0) then round((sum((`ig`.`Quantidade` * (select `ie`.`PrecoUnitario` from `raizes`.`insumoestoque` `ie` where (`ie`.`InsumoId` = `ig`.`InsumoId`) order by `ie`.`DataMovimentacao` desc limit 1))) / `co`.`Quantidade`),2) end) AS `CustoUnitario` from ((((`raizes`.`colheita` `co` join `raizes`.`plantio` `pl` on((`pl`.`Id` = `co`.`PlantioId`))) join `raizes`.`planta` `p` on((`p`.`Id` = `pl`.`PlantaId`))) join `raizes`.`propriedade` `pr` on((`pr`.`Id` = `pl`.`PropriedadeId`))) left join `raizes`.`plantioinsumo` `ig` on((`ig`.`PlantioId` = `pl`.`Id`))) group by `co`.`Id`,`pr`.`Nome`,`p`.`NomeComum`,`co`.`DataColheita`,`co`.`Quantidade` order by `co`.`DataColheita`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_margem_plantio`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_margem_plantio` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_margem_plantio` AS select `raizes`.`h`.`ColheitaId` AS `ColheitaId`,`raizes`.`h`.`Propriedade` AS `Propriedade`,`raizes`.`h`.`Cultura` AS `Cultura`,`raizes`.`h`.`Data` AS `Data`,`raizes`.`h`.`CustoTotal` AS `CustoTotal`,round(sum((`v`.`Quantidade` * `v`.`PrecoUnitario`)),2) AS `ReceitaTotal`,round((sum((`v`.`Quantidade` * `v`.`PrecoUnitario`)) - `raizes`.`h`.`CustoTotal`),2) AS `Lucro` from (`raizes`.`vw_historico_colheitas` `h` left join `raizes`.`venda` `v` on((`v`.`ColheitaId` = `raizes`.`h`.`ColheitaId`))) group by `raizes`.`h`.`ColheitaId`,`raizes`.`h`.`Propriedade`,`raizes`.`h`.`Cultura`,`raizes`.`h`.`Data`,`raizes`.`h`.`CustoTotal`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_produtividade_cultura_prop`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_produtividade_cultura_prop` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_produtividade_cultura_prop` AS select `p`.`NomeComum` AS `Cultura`,`pr`.`Nome` AS `Propriedade`,round((sum(`co`.`Quantidade`) / nullif(sum(`pl`.`AreaPlantada`),0)),2) AS `ProdutividadeMedia` from (((`raizes`.`plantio` `pl` join `raizes`.`colheita` `co` on((`co`.`PlantioId` = `pl`.`Id`))) join `raizes`.`planta` `p` on((`p`.`Id` = `pl`.`PlantaId`))) join `raizes`.`propriedade` `pr` on((`pr`.`Id` = `pl`.`PropriedadeId`))) group by `p`.`NomeComum`,`pr`.`Nome`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_tendencia_consumo_insumos`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_tendencia_consumo_insumos` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_tendencia_consumo_insumos` AS select year(`ig`.`DataAplicacao`) AS `Ano`,month(`ig`.`DataAplicacao`) AS `Mes`,`i`.`Nome` AS `Insumo`,round(sum(`ig`.`Quantidade`),2) AS `QtConsumida` from (`raizes`.`plantioinsumo` `ig` join `raizes`.`insumo` `i` on((`i`.`Id` = `ig`.`InsumoId`))) group by `Ano`,`Mes`,`i`.`Nome` order by `Ano`,`Mes`;
+
+-- -----------------------------------------------------
+-- View `raizes`.`vw_trends_solo`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `raizes`.`vw_trends_solo` ;
+
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `raizes`.`vw_trends_solo` AS select `hs`.`PropriedadeId` AS `PropriedadeId`,`pr`.`Nome` AS `Propriedade`,`hs`.`DataLeitura` AS `DataLeitura`,`hs`.`PH` AS `PH`,`hs`.`Umidade` AS `Umidade`,`hs`.`Nutricao` AS `Nutricao` from (`raizes`.`historicosolo` `hs` join `raizes`.`propriedade` `pr` on((`pr`.`Id` = `hs`.`PropriedadeId`))) order by `hs`.`DataLeitura`;

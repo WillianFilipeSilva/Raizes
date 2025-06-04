@@ -1,0 +1,241 @@
+-- ==================  CRUD RAÍZES  ========================
+-- Cada bloco contém: INSERT  •  UPDATE  •  DELETE
+-- =========================================================
+
+
+-- ===============  TIPOSOLO  ==============================
+-- Insert
+INSERT INTO raizes.tiposolo (Nome, Descricao)
+VALUES (@Nome, @Descricao);
+
+-- Update
+UPDATE raizes.tiposolo
+SET Nome = @Nome,
+    Descricao = @Descricao
+WHERE Id = @Id;
+
+-- Delete
+DELETE FROM raizes.tiposolo WHERE Id = @Id;
+
+
+
+-- ===============  UNIDADEMEDIDA  =========================
+INSERT INTO raizes.unidademedida (Sigla, Nome)
+VALUES (@Sigla, @Nome);
+
+UPDATE raizes.unidademedida
+SET Sigla = @Sigla,
+    Nome  = @Nome
+WHERE Id = @Id;
+
+DELETE FROM raizes.unidademedida WHERE Id = @Id;
+
+
+
+-- ===============  PLANTA  ================================
+INSERT INTO raizes.planta
+ (NomeComum, NomeCientifico, TempoDeColheita,
+  TipoSoloIdealId, IdealPHMin, IdealPHMax,
+  IdealUmidadeMin, IdealUmidadeMax, Caracteristicas)
+VALUES
+ (@NomeComum, @NomeCientifico, @TempoDeColheita,
+  @TipoSoloIdealId, @IdealPHMin, @IdealPHMax,
+  @IdealUmidadeMin, @IdealUmidadeMax, @Caracteristicas);
+
+UPDATE raizes.planta
+SET NomeComum       = @NomeComum,
+    NomeCientifico  = @NomeCientifico,
+    TempoDeColheita = @TempoDeColheita,
+    TipoSoloIdealId = @TipoSoloIdealId,
+    IdealPHMin      = @IdealPHMin,
+    IdealPHMax      = @IdealPHMax,
+    IdealUmidadeMin = @IdealUmidadeMin,
+    IdealUmidadeMax = @IdealUmidadeMax,
+    Caracteristicas = @Caracteristicas
+WHERE Id = @Id;
+
+DELETE FROM raizes.planta WHERE Id = @Id;
+
+
+
+-- ===============  USUARIO  ===============================
+INSERT INTO raizes.usuario
+ (Nome, Sobrenome, Cpf, Email, Senha, Status)
+VALUES
+ (@Nome, @Sobrenome, @Cpf, @Email, @Senha, @Status);
+
+UPDATE raizes.usuario
+SET Nome      = @Nome,
+    Sobrenome = @Sobrenome,
+    Cpf       = @Cpf,
+    Email     = @Email,
+    Senha     = @Senha,
+    Status    = @Status
+WHERE Id = @Id;
+
+DELETE FROM raizes.usuario WHERE Id = @Id;
+
+
+
+-- ===============  FORNECEDOR  ============================
+INSERT INTO raizes.fornecedor (Nome, CNPJ, Telefone, Email)
+VALUES (@Nome, @CNPJ, @Telefone, @Email);
+
+UPDATE raizes.fornecedor
+SET Nome     = @Nome,
+    CNPJ     = @CNPJ,
+    Telefone = @Telefone,
+    Email    = @Email
+WHERE Id = @Id;
+
+DELETE FROM raizes.fornecedor WHERE Id = @Id;
+
+
+
+-- ===============  INSUMO  ================================
+INSERT INTO raizes.insumo (Nome, Tipo, Descricao, FornecedorId)
+VALUES (@Nome, @Tipo, @Descricao, @FornecedorId);
+
+UPDATE raizes.insumo
+SET Nome         = @Nome,
+    Tipo         = @Tipo,
+    Descricao    = @Descricao,
+    FornecedorId = @FornecedorId
+WHERE Id = @Id;
+
+DELETE FROM raizes.insumo WHERE Id = @Id;
+
+
+
+-- ===============  PROPRIEDADE  ===========================
+INSERT INTO raizes.propriedade (Nome, Endereco, UsuarioId, Status)
+VALUES (@Nome, @Endereco, @UsuarioId, @Status);
+
+UPDATE raizes.propriedade
+SET Nome      = @Nome,
+    Endereco  = @Endereco,
+    UsuarioId = @UsuarioId,
+    Status    = @Status
+WHERE Id = @Id;
+
+DELETE FROM raizes.propriedade WHERE Id = @Id;
+
+
+
+-- ===============  PLANTIO  ===============================
+INSERT INTO raizes.plantio
+ (PropriedadeId, PlantaId, DataInicio, DataFim,
+  AreaPlantada, Descricao)
+VALUES
+ (@PropriedadeId, @PlantaId, @DataInicio, @DataFim,
+  @AreaPlantada, @Descricao);
+
+UPDATE raizes.plantio
+SET PropriedadeId = @PropriedadeId,
+    PlantaId      = @PlantaId,
+    DataInicio    = @DataInicio,
+    DataFim       = @DataFim,
+    AreaPlantada  = @AreaPlantada,
+    Descricao     = @Descricao
+WHERE Id = @Id;
+
+DELETE FROM raizes.plantio WHERE Id = @Id;
+
+
+
+-- ===============  COLHEITA  ==============================
+INSERT INTO raizes.colheita
+ (PlantioId, DataColheita, Quantidade, UnidadeMedidaId, Observacao)
+VALUES
+ (@PlantioId, @DataColheita, @Quantidade, @UnidadeMedidaId, @Observacao);
+
+UPDATE raizes.colheita
+SET PlantioId       = @PlantioId,
+    DataColheita    = @DataColheita,
+    Quantidade      = @Quantidade,
+    UnidadeMedidaId = @UnidadeMedidaId,
+    Observacao      = @Observacao
+WHERE Id = @Id;
+
+DELETE FROM raizes.colheita WHERE Id = @Id;
+
+
+
+-- ===============  INSUMOESTOQUE  =========================
+INSERT INTO raizes.insumoestoque
+ (PropriedadeId, InsumoId, Quantidade, Validade,
+  DataMovimentacao, PrecoUnitario)
+VALUES
+ (@PropriedadeId, @InsumoId, @Quantidade, @Validade,
+  @DataMovimentacao, @PrecoUnitario);
+
+UPDATE raizes.insumoestoque
+SET PropriedadeId    = @PropriedadeId,
+    InsumoId         = @InsumoId,
+    Quantidade       = @Quantidade,
+    Validade         = @Validade,
+    DataMovimentacao = @DataMovimentacao,
+    PrecoUnitario    = @PrecoUnitario
+WHERE Id = @Id;
+
+DELETE FROM raizes.insumoestoque WHERE Id = @Id;
+
+
+
+-- ===============  PLANTIOINSUMO  =========================
+INSERT INTO raizes.plantioinsumo
+ (PlantioId, InsumoId, Quantidade, DataAplicacao)
+VALUES
+ (@PlantioId, @InsumoId, @Quantidade, @DataAplicacao);
+
+UPDATE raizes.plantioinsumo
+SET PlantioId     = @PlantioId,
+    InsumoId      = @InsumoId,
+    Quantidade    = @Quantidade,
+    DataAplicacao = @DataAplicacao
+WHERE Id = @Id;
+
+DELETE FROM raizes.plantioinsumo WHERE Id = @Id;
+
+
+
+-- ===============  VENDA  =================================
+INSERT INTO raizes.venda
+ (ColheitaId, PlantaId, Quantidade, PrecoUnitario,
+  UnidadeMedidaId, DataVenda)
+VALUES
+ (@ColheitaId, @PlantaId, @Quantidade, @PrecoUnitario,
+  @UnidadeMedidaId, @DataVenda);
+
+UPDATE raizes.venda
+SET ColheitaId      = @ColheitaId,
+    PlantaId        = @PlantaId,
+    Quantidade      = @Quantidade,
+    PrecoUnitario   = @PrecoUnitario,
+    UnidadeMedidaId = @UnidadeMedidaId,
+    DataVenda       = @DataVenda
+WHERE Id = @Id;
+
+DELETE FROM raizes.venda WHERE Id = @Id;
+
+
+
+-- ===============  HISTORICOSOLO  =========================
+INSERT INTO raizes.historicosolo
+ (PropriedadeId, TipoSoloId, DataLeitura,
+  PH, Umidade, Nutricao, Observacoes)
+VALUES
+ (@PropriedadeId, @TipoSoloId, @DataLeitura,
+  @PH, @Umidade, @Nutricao, @Observacoes);
+
+UPDATE raizes.historicosolo
+SET PropriedadeId = @PropriedadeId,
+    TipoSoloId    = @TipoSoloId,
+    DataLeitura   = @DataLeitura,
+    PH            = @PH,
+    Umidade       = @Umidade,
+    Nutricao      = @Nutricao,
+    Observacoes   = @Observacoes
+WHERE Id = @Id;
+
+DELETE FROM raizes.historicosolo WHERE Id = @Id;
