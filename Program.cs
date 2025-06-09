@@ -1,48 +1,67 @@
-Ôªøusing Raizes.Application;
 using Raizes.Contracts.Services;
+using Raizes.Services;
 
-namespace Raizes
+public class Program
 {
-    public class Program 
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args) 
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        var app = builder.Build();
+
+        if (app.Environment.IsDevelopment())
         {
-            await MostrarMenuCRUD();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
 
-        public static async Task MostrarMenuCRUD()
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+
+        await MostrarMenuCRUD();
+    }
+
+    public static async Task MostrarMenuCRUD()
+    {
+        IUsuarioService _usuarioService = new UsuarioService();
+
+        Console.WriteLine("Selecione um OpÁ„o\n Create - C\n Read - R\n Update - U\n Delete - D\n");
+        var opcao = Console.ReadLine();
+
+        switch (opcao)
         {
-            IUsuarioAppService _usuarioAppService = new UsuarioAppService();
-
-            Console.WriteLine("Selecione um Op√ß√£o\n Create - C\n Read - R\n Update - U\n Delete - D\n");
-            var opcao = Console.ReadLine();
-
-            switch (opcao) 
-            {
-                case "C":
-                case "c":
-                    await _usuarioAppService.Create();
-                    break;
-                case "R":
-                case "r":
-                    await _usuarioAppService.Read();
-                    break;
-                case "U":
-                case "u":
-                    await _usuarioAppService.Update();
-                    break;
-                case "D":
-                case "d":
-                    await _usuarioAppService.Delete();
-                    break;
-                default:
-                    Console.WriteLine("Selecione uma op√ß√£o v√°lida");
-                    break;
-            }
-
-            Console.WriteLine("Pressione enter para continuar");
-            Console.ReadLine();
-            Console.Clear();
+            case "C":
+            case "c":
+                await _usuarioService.Create();
+                break;
+            case "R":
+            case "r":
+                await _usuarioService.Read();
+                break;
+            case "U":
+            case "u":
+                await _usuarioService.Update();
+                break;
+            case "D":
+            case "d":
+                await _usuarioService.Delete();
+                break;
+            default:
+                Console.WriteLine("Selecione uma opÁ„o v·lida");
+                break;
         }
+
+        Console.WriteLine("Pressione enter para continuar");
+        Console.ReadLine();
+        Console.Clear();
     }
 }
