@@ -35,5 +35,17 @@ namespace Raizes.Controllers
         {
             await _usuarioService.Insert(usuario);
         }
+
+        [HttpPost]
+        public async Task Update(UsuarioEntity usuario)
+        {
+            await _usuarioService.Insert(usuario);
+        }
+
+        [HttpPost]
+        public async Task Delete(UsuarioEntity usuario)
+        {
+            await _usuarioService.Insert(usuario);
+        }
     }
 }
