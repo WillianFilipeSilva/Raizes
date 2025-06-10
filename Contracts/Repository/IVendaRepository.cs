@@ -3,7 +3,7 @@ using Raizes.Entity;
 
 namespace Raizes.Contracts.Repository
 {
-    public interface IUsuarioRepository : IRepositoryBase<UsuarioEntity>
+    public interface IVendaRepository : IRepositoryBase<VendaEntity>
     {
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Raizes.Contracts.Services;
 using Raizes.Entity;
+using Raizes.Response;
 using Raizes.Response.Usuario;
 using Raizes.Services;
 
 namespace Raizes.Controllers
 {
     [ApiController]
-    [Route("api/usuarios")]
+    [Route("api/usuarios/")]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
@@ -23,28 +24,28 @@ namespace Raizes.Controllers
             return await _usuarioService.GetAll();
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<UsuarioEntity> GetById(int id)
         {
             return await _usuarioService.GetById(id);
         }
 
         [HttpPost]
-        public async Task Insert(UsuarioEntity usuario)
+        public async Task<MessageResponse> Insert(UsuarioEntity usuario)
         {
-            await _usuarioService.Insert(usuario);
+            return await _usuarioService.Insert(usuario);
         }
 
         [HttpPut]
-        public async Task Update(UsuarioEntity usuario)
+        public async Task<MessageResponse> Update(UsuarioEntity usuario)
         {
-            await _usuarioService.Update(usuario);
+            return await _usuarioService.Update(usuario);
         }
 
-        [HttpDelete("/{id}")]
-        public async Task Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<MessageResponse> Delete(int id)
         {
-            await _usuarioService.Delete(id);
+            return await _usuarioService.Delete(id);
         }
     }
 }

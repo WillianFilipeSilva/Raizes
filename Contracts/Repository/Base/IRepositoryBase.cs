@@ -1,5 +1,4 @@
-﻿
-namespace Raizes.Contracts.Repository
+﻿namespace Raizes.Contracts.Repository.Base
 {
     public interface IRepositoryBase<T> where T : class
     {

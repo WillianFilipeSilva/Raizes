@@ -1,14 +1,10 @@
 ﻿using Raizes.Entity;
+using Raizes.Response.ResponseBase;
 
 namespace Raizes.Response.Usuario
 {
-    public class UsuarioGetAllResponse
+    public class UsuarioGetAllResponse : ResponseBase<UsuarioEntity>
     {
-        public IEnumerable<UsuarioEntity> Data { get; set; }
-
-        public UsuarioGetAllResponse(IEnumerable<UsuarioEntity> data)
-        {
-            Data = data;
-        }
+        public UsuarioGetAllResponse(IEnumerable<UsuarioEntity> data) : base(data) { }
     }
 }

@@ -12,12 +12,12 @@ namespace Raizes.Contracts.Services
         Task<UsuarioEntity> GetById(int Id);
 
         //Post
-        Task <MessageResponse> Insert(UsuarioEntity usuario);
+        Task<MessageResponse> Insert(UsuarioEntity usuario);
 
         //Put
-        Task <MessageResponse> Update(UsuarioEntity usuario);
+        Task<MessageResponse> Update(UsuarioEntity usuario);
 
         //Delete
-        Task <MessageResponse> Delete(int Id);
+        Task<MessageResponse> Delete(int Id);
     }
 }
