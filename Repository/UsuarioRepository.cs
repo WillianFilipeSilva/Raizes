@@ -8,17 +8,7 @@ namespace Raizes.Repository
     {
         private readonly Connection _connection = new();
 
-        public Task<IEnumerable<UsuarioEntity>> GetAll()
-        {
-            var sql = @"
-                SELECT Id, Nome, Sobrenome, Cpf, Email,
-                       Senha, CriadoEm, Status
-                FROM raizes.usuario;
-            ";
-            return _connection.ExecuteQuery<UsuarioEntity>(sql);
-        }
-
-        public async Task<UsuarioEntity?> GetById(int id)
+        public async Task<UsuarioEntity> GetById(int id)
         {
             var sql = @"
                 SELECT Id, Nome, Sobrenome, Cpf, Email,
@@ -26,11 +16,21 @@ namespace Raizes.Repository
                 FROM raizes.usuario
                 WHERE Id = @id;
             ";
-            return (await _connection.ExecuteQuery<UsuarioEntity>(sql))
-                   .FirstOrDefault();
+
+            return await _connection.ExecuteQueryFirstAsync<UsuarioEntity>(sql, new { id });
         }
 
-        public Task Insert(UsuarioEntity entity)
+        public async Task<IEnumerable<UsuarioEntity>> GetAll()
+        {
+            var sql = @"
+                SELECT Id, Nome, Sobrenome, Cpf, Email,
+                       Senha, CriadoEm, Status
+                FROM raizes.usuario;
+            ";
+            return await _connection.ExecuteQueryAsync<UsuarioEntity>(sql);
+        }
+
+        public async Task Insert(UsuarioEntity entity)
         {
             var sql = @"
                 INSERT INTO raizes.usuario
@@ -38,10 +38,10 @@ namespace Raizes.Repository
                 VALUES
                   (@Nome, @Sobrenome, @Cpf, @Email, @Senha, @CriadoEm, @Status);
             ";
-            return _connection.Execute(sql, entity);
+            await _connection.ExecuteAsync(sql, entity);
         }
 
-        public Task Update(UsuarioEntity entity)
+        public async Task Update(UsuarioEntity entity)
         {
             var sql = @"
                 UPDATE raizes.usuario
@@ -49,13 +49,13 @@ namespace Raizes.Repository
                     Email=@Email, Senha=@Senha, Status=@Status
                 WHERE Id = @Id;
             ";
-            return _connection.Execute(sql, entity);
+            await _connection.ExecuteAsync(sql, entity);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
             var sql = @"DELETE FROM raizes.usuario WHERE Id = @id;";
-            return _connection.Execute(sql, new { id });
+            await _connection.ExecuteAsync(sql, new { id });
         }
     }
 }

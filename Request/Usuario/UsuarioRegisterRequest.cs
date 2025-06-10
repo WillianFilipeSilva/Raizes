@@ -1,4 +1,4 @@
-﻿namespace Raizes.Request
+﻿namespace Raizes.Request.Usuario
 {
     public class UsuarioRegisterRequest
     {

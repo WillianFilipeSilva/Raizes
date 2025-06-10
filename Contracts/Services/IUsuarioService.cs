@@ -1,24 +1,23 @@
 ﻿using Raizes.Entity;
 using Raizes.Response;
+using Raizes.Response.Usuario;
 
 namespace Raizes.Contracts.Services
 {
     public interface IUsuarioService
     {
+        //Get
         Task<UsuarioGetAllResponse> GetAll();
 
-        Task<UsuarioEntity?> GetById(int Id);
+        Task<UsuarioEntity> GetById(int Id);
 
         //Post
-        Task Insert(UsuarioEntity usuario);
+        Task <MessageResponse> Insert(UsuarioEntity usuario);
 
-        //Antigos...
-        Task Create();
+        //Put
+        Task <MessageResponse> Update(UsuarioEntity usuario);
 
-        Task Read();
-
-        Task Update();
-
-        Task Delete();
+        //Delete
+        Task <MessageResponse> Delete(int Id);
     }
 }

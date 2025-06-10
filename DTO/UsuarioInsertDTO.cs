@@ -1,4 +1,4 @@
-﻿namespace Raizes.Contracts.DTO
+﻿namespace Raizes.DTO
 {
     public class UsuarioInsertDTO
     {
